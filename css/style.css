@@ -1,84 +1,42 @@
 body {
-    margin: 0;
-    height: 100vh;
-    background-color: black;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  background: url(https://source.unsplash.com/N3o-leQyFsI/1080x720) no-repeat 50% 50%;
+  background-size: cover;
 }
-
-.monster {
-    width: 100vw;
-    height: 50vh;
-    background-color: lightcyan;
-    position: relative;
-    overflow: hidden;
+svg {
+  max-width: 50vw;
+  max-height: 65vh;
+  display: block;
+  position: absolute;
+  left: 53%;
+  top: 42%;
+  transform: translate(-50%, -50%);
 }
-
-.body {
-    width: 32vmin;
-    height: 32vmin;
-    background-color: teal;
-    border-radius: 43% 40% 43% 40%;
-    position: absolute;
-    bottom: calc(-1 * 32vmin / 2 - 4vmin);
-    left: -2vmin;
-    animation:
-        wander 5s linear infinite alternate,
-        wave 3s linear infinite,
-        bounce 1s infinite alternate;
+#Signature path {
+  fill: black;
 }
-
-.eyes {
-    width: 24vmin;
-    height: 5vmin;
-    position: absolute;
-    bottom: 2vmin;
-    left: calc(32vmin - 24vmin - 2vmin);
-    animation: wander 5s linear infinite alternate;
+mask path {
+  fill: none;
+  stroke: white;
 }
-
-.eyes::before,
-.eyes::after {
-    content: '';
-    position: absolute;
-    width: 5vmin;
-    height: 5vmin;
-    border: 1.25vmin solid white;
-    box-sizing: border-box;
-    border-radius: 50%;
-    animation: blink 3s infinite linear;
+#Mouse path,
+mask path {
+  animation-duration: var(--duration);
+  animation-timing-function: ease-in;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  stroke-dasharray: var(--length) var(--length);
+  stroke-dashoffset: var(--length);
+  animation-name: brush;
+  animation-delay: var(--delay);
 }
-
-.eyes::before {
-    left: 4vmin;
-}
-
-.eyes::after {
-    right: 4vmin;
-}
-
-@keyframes bounce {
-    to {
-        bottom: calc(-1 * 32vmin / 2 - 2vmin);
-    }
-}
-
-@keyframes wave {
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-@keyframes wander {
-    to {
-        left: calc(100% - 32vmin + 2vmin);
-    }
-}
-
-@keyframes blink {
-    0%, 4%, 10%, 34%, 40%, 100% {
-        transform: scaleY(1);
-    }
-
-    7%, 37% {
-        transform: scaleY(0);
-    }
+@keyframes brush {
+  0% {
+    stroke-dashoffset: var(--length);
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
 }
